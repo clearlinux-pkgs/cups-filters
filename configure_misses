@@ -1,0 +1,8 @@
+Configure miss: x86_64-generic-linux-gnu-cups-config
+Configure miss: ldap.h usability
+Configure miss: ldap.h presence
+Configure miss: ldap.h
+Configure miss: ijs
+Configure miss: whether pdftops supports -origpagesizes
+Configure miss: whether pdftops supports -r
+Configure miss: liblouis
