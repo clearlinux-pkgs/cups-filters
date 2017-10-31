@@ -4,13 +4,14 @@
 #
 Name     : cups-filters
 Version  : 1.17.9
-Release  : 2
+Release  : 3
 URL      : https://www.openprinting.org/download/cups-filters/cups-filters-1.17.9.tar.xz
 Source0  : https://www.openprinting.org/download/cups-filters/cups-filters-1.17.9.tar.xz
 Summary  : Library for reading and writing cups filters
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: cups-filters-bin
+Requires: cups-filters-config
 Requires: cups-filters-lib
 Requires: cups-filters-data
 Requires: cups-filters-doc
@@ -29,6 +30,7 @@ BuildRequires : pkgconfig(libpng)
 BuildRequires : pkgconfig(poppler)
 BuildRequires : pkgconfig(zlib)
 BuildRequires : qpdf-dev
+Patch1: 0001-fix-systemd-service-file.patch
 
 %description
 -------------------------------------------------------
@@ -39,9 +41,18 @@ instead...
 Summary: bin components for the cups-filters package.
 Group: Binaries
 Requires: cups-filters-data
+Requires: cups-filters-config
 
 %description bin
 bin components for the cups-filters package.
+
+
+%package config
+Summary: config components for the cups-filters package.
+Group: Default
+
+%description config
+config components for the cups-filters package.
 
 
 %package data
@@ -83,20 +94,25 @@ lib components for the cups-filters package.
 
 %prep
 %setup -q -n cups-filters-1.17.9
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1509063849
+export SOURCE_DATE_EPOCH=1509466099
 %autogen --disable-static --disable-avahi --without-tiff --disable-ijs --disable-ghostscript --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1509063849
+export SOURCE_DATE_EPOCH=1509466099
 rm -rf %{buildroot}
 %make_install
+## make_install_append content
+mkdir -p %{buildroot}/usr/lib/systemd/system
+install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system/cups-browsed.service
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -133,6 +149,10 @@ rm -rf %{buildroot}
 /usr/bin/driverless
 /usr/bin/foomatic-rip
 /usr/bin/ttfread
+
+%files config
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/cups-browsed.service
 
 %files data
 %defattr(-,root,root,-)
