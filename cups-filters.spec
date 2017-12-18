@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.17.9
-Release  : 5
+Release  : 6
 URL      : https://github.com/OpenPrinting/cups-filters/releases/download/v1.17.9/cups-filters-1.17.9.tar.bz2
 Source0  : https://github.com/OpenPrinting/cups-filters/releases/download/v1.17.9/cups-filters-1.17.9.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -16,8 +16,10 @@ Requires: cups-filters-lib
 Requires: cups-filters-data
 Requires: cups-filters-doc
 BuildRequires : cups-dev
+BuildRequires : ghostscript-dev
 BuildRequires : glib-dev
 BuildRequires : krb5-dev
+BuildRequires : openldap-dev
 BuildRequires : pkgconfig(com_err)
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(fontconfig)
@@ -101,12 +103,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1510237447
-%autogen --disable-static --disable-avahi --without-tiff --disable-ijs --disable-ghostscript --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
-make V=1  %{?_smp_mflags}
+export SOURCE_DATE_EPOCH=1513636184
+%autogen --disable-static --disable-avahi --without-tiff --disable-ijs  --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1510237447
+export SOURCE_DATE_EPOCH=1513636184
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -126,6 +128,9 @@ install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system
 /usr/lib/cups/filter/commandtoescpx
 /usr/lib/cups/filter/commandtopclx
 /usr/lib/cups/filter/foomatic-rip
+/usr/lib/cups/filter/gstopdf
+/usr/lib/cups/filter/gstopxl
+/usr/lib/cups/filter/gstoraster
 /usr/lib/cups/filter/imagetopdf
 /usr/lib/cups/filter/imagetops
 /usr/lib/cups/filter/imagetoraster
@@ -180,6 +185,7 @@ install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system
 /usr/share/cups/data/topsecret.pdf
 /usr/share/cups/data/unclassified.pdf
 /usr/share/cups/drv/cupsfilters.drv
+/usr/share/cups/mime/cupsfilters-ghostscript.convs
 /usr/share/cups/mime/cupsfilters-poppler.convs
 /usr/share/cups/mime/cupsfilters.convs
 /usr/share/cups/mime/cupsfilters.types
@@ -189,6 +195,8 @@ install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system
 /usr/share/ppd/cupsfilters/Generic-PDF_Printer-PDF.ppd
 /usr/share/ppd/cupsfilters/HP-Color_LaserJet_CM3530_MFP-PDF.ppd
 /usr/share/ppd/cupsfilters/Ricoh-PDF_Printer-PDF.ppd
+/usr/share/ppd/cupsfilters/pxlcolor.ppd
+/usr/share/ppd/cupsfilters/pxlmono.ppd
 
 %files dev
 %defattr(-,root,root,-)
