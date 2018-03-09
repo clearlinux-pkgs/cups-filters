@@ -1,5 +1,21 @@
-NEWS - OpenPrinting CUPS Filters v1.20.0 - 2018-01-29
+NEWS - OpenPrinting CUPS Filters v1.20.1 - 2018-02-25
 -----------------------------------------------------
+
+CHANGES IN V1.20.1
+
+	- libcupsfilters: Silenced warning when using CUPS < 2.x by
+	  eliminating the use of a recently introduced CUPS library
+	  function (Bugzilla bug #1421).
+	- braille: Fix some missing options on indexv4. Thanks to
+	  Samuel Thibault for this patch (Pull request #21).
+	- braille: Fix disabling margins on indexv4 in graphic
+          mode. Thanks to Samuel Thibault for this patch (Pull request
+          #20).
+	- braille: Fix installation of brftopagedbrf. Thanks to Samuel
+          Thibault for this patch (Pull request #18, Issue #17).
+	- cups-browsed: Fixed crash when CUPS reports a print queue
+          without "device-uri" attribute when cups-browsed polls a
+          list of local CUPS queues (Issue #16).
 
 CHANGES IN V1.20.0
 
