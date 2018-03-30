@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.20.1
-Release  : 11
+Release  : 12
 URL      : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-1/cups-filters-1.20.1.tar.bz2
 Source0  : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-1/cups-filters-1.20.1.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -103,12 +103,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1520610629
+export SOURCE_DATE_EPOCH=1522387556
 %autogen --disable-static --disable-avahi --without-tiff --disable-ijs  --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1520610629
+export SOURCE_DATE_EPOCH=1522387556
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
