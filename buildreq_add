@@ -4,3 +4,4 @@ qpdf-dev
 glib-dev
 krb5-dev
 ghostscript-dev
+gnutls-dev

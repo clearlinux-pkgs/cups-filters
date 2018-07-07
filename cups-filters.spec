@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.20.3
-Release  : 19
+Release  : 20
 URL      : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-3/cups-filters-1.20.3.tar.bz2
 Source0  : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-3/cups-filters-1.20.3.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -14,10 +14,12 @@ Requires: cups-filters-bin
 Requires: cups-filters-config
 Requires: cups-filters-lib
 Requires: cups-filters-data
-Requires: cups-filters-doc
+Requires: cups-filters-license
+Requires: cups-filters-man
 BuildRequires : cups-dev
 BuildRequires : ghostscript-dev
 BuildRequires : glib-dev
+BuildRequires : gnutls-dev
 BuildRequires : krb5-dev
 BuildRequires : openldap-dev
 BuildRequires : pkgconfig(com_err)
@@ -44,6 +46,8 @@ Summary: bin components for the cups-filters package.
 Group: Binaries
 Requires: cups-filters-data
 Requires: cups-filters-config
+Requires: cups-filters-license
+Requires: cups-filters-man
 
 %description bin
 bin components for the cups-filters package.
@@ -80,6 +84,7 @@ dev components for the cups-filters package.
 %package doc
 Summary: doc components for the cups-filters package.
 Group: Documentation
+Requires: cups-filters-man
 
 %description doc
 doc components for the cups-filters package.
@@ -89,9 +94,26 @@ doc components for the cups-filters package.
 Summary: lib components for the cups-filters package.
 Group: Libraries
 Requires: cups-filters-data
+Requires: cups-filters-license
 
 %description lib
 lib components for the cups-filters package.
+
+
+%package license
+Summary: license components for the cups-filters package.
+Group: Default
+
+%description license
+license components for the cups-filters package.
+
+
+%package man
+Summary: man components for the cups-filters package.
+Group: Default
+
+%description man
+man components for the cups-filters package.
 
 
 %prep
@@ -103,13 +125,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1523543184
+export SOURCE_DATE_EPOCH=1530990484
 %autogen --disable-static --disable-avahi --without-tiff --disable-ijs  --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1523543184
+export SOURCE_DATE_EPOCH=1530990484
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/cups-filters
+cp COPYING %{buildroot}/usr/share/doc/cups-filters/COPYING
 %make_install
 ## make_install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system
@@ -216,11 +240,8 @@ install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system
 /usr/lib64/pkgconfig/libfontembed.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/doc/cups\-filters/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
-%doc /usr/share/man/man8/*
 
 %files lib
 %defattr(-,root,root,-)
@@ -228,3 +249,14 @@ install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system
 /usr/lib64/libcupsfilters.so.1.0.0
 /usr/lib64/libfontembed.so.1
 /usr/lib64/libfontembed.so.1.0.0
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/cups-filters/COPYING
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man1/driverless.1
+/usr/share/man/man1/foomatic-rip.1
+/usr/share/man/man5/cups-browsed.conf.5
+/usr/share/man/man8/cups-browsed.8
