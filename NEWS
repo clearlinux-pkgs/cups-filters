@@ -1,5 +1,78 @@
-NEWS - OpenPrinting CUPS Filters v1.20.3 - 2018-04-12
+NEWS - OpenPrinting CUPS Filters v1.20.4 - 2018-07-12
 -----------------------------------------------------
+
+CHANGES IN V1.20.4
+
+	- README: Added link to Issue Tracker on GitHub.
+	- gstoraster: Removed unneeded "if"s. Thanks to Laurent
+	  Martelli (martellilaurent at gmail dot com) for the patch
+	  (Ghostscript bug #692705).
+	- cups-browsed: When checking whether there is already a local
+	  print queue with the same URI as the one of the discovered
+	  printer, consider also as equal URI if the URIs only differ
+	  by use of IPP or IPPS and/or use of HTTPS port 443 instead
+	  of IPP port 631.
+	- cups-browsed: Also upgrade from ipp: to ipps: when the ipps:
+	  URI is on HTTPS port 443 instead of IPP port 631. This is
+	  common on IPP network printers.
+	- pdftopdf: Removed support for hardware-implemented reversing
+	  of page order in PostScript printers. It was once not
+	  correctly implemented in cups-filters and second, such
+	  printers are extremely rare, and on Gutenprint PPDs with
+	  pseudo OutputOrder option hardware reversing was even
+	  wrongly assumed (Issue #47).
+	- pdftopdf: Accept option "output-order=normal/reverse" for
+	  reversing page order (Issue #47) and also "page-delivery=
+	  same-order/reverse-order" (CUPS Issue #5340).
+	- libcupsfilters: Let the PPD generator add "*PageStackOrder
+	  ..."  lines to the choices of the "OutputBin" option, to
+	  mark which output bins need the pages printed in reverse
+	  order (Issue #47).
+	- libcupsfilters: Let the PPD generator correctly create a
+	  "*DefaultOutputOrder: ..."  entry, depending on whether the
+	  paper is put out face-up or face-down in the default output
+	  bin (Issue #47).
+	- libcupsfilters: Fixed human-readable name of the OutputBin
+	  option in the PPD generator.
+	- pdftoopvp: Silence compiler warning (Issue #42).
+	- cups-browsed: If the user modifies/overwrites a print queue
+	  created by cups-browsed, it will now not only be
+	  automatically released from the control of cups-browsed, but
+	  we also create a replacement for our generated local queue
+	  under a new name.
+	- cups-browsed: Make URIS for using the implicitclass backend
+	  correctly working also with queue names containing an '@'
+	  character.
+	- braille: Strengthen error checking (Pull request #41).
+	- braille: Index: Replace bogus characters with space (Pull
+          request #41).
+	- braille: Add print and braille page number options (Pull
+          request #41).
+	- braille: Index: Use standard duplex cups option (Pull
+          request #41).
+	- cups-browsed: Moved auto-generation of PPD file for IPP
+	  network printers from create_remote_printer_entry()
+	  function to update_cups_queues(). This allows re-creating
+	  accidentally removed or overwritten local queues without
+	  losing the PPD file.
+	- braille: Add option to pick hyphenation rule according to
+	  current locale and make it the default for second
+	  translation table. Thanks to Samuel Thibault for this patch
+	  (Pull request #38 and #39).
+	- braille: Remove generated defs on "make clean". Thanks to
+	  Samuel Thibault for this patch (Pull request #38).
+	- braille: Turn non-breakable spaces to spaces. Thanks to
+	  Samuel Thibault for this patch (Pull request #38 and #39).
+	- braille: Fix character encoding when extracting text. When
+	  extracing text from a zip file or a pdf, the resulting text
+	  is always utf-8 independently of the original locale, so we
+	  need to force that. Thanks to Samuel Thibault for this patch
+	  (Pull request #38).
+	- braille: Warn when no text translation was selected in case
+	  the user didn't notice. Thanks to Samuel Thibault for this
+	  patch (Pull request #37).
+	- braille: Fix spurious spacing after last Form-Feed (Pull
+	  request #45).
 
 CHANGES IN V1.20.3
 
@@ -299,7 +372,8 @@ CHANGES IN V1.17.0
 
 	- rastertopdf, rastertopclm, driverless, cups-browsed,
 	  libcupsfilters: Added support for the PCLm output format for
-	  driverless printing on Mopria and Wi-Fi Direct
+	  driverless printing on printers using Wi-Fi Direct and other
+	  driverless printing standards.
 	  printers. This is the Google Summer of Code 2017 project of
 	  Sahil Arora (sahilarora dot 535 at gmail dot com). Thank you
 	  very much for your great work!  The PCLm support requires
