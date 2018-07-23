@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.20.4
-Release  : 22
+Release  : 23
 URL      : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-4/cups-filters-1.20.4.tar.bz2
 Source0  : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-4/cups-filters-1.20.4.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -16,6 +16,7 @@ Requires: cups-filters-lib
 Requires: cups-filters-data
 Requires: cups-filters-license
 Requires: cups-filters-man
+BuildRequires : buildreq-cpan
 BuildRequires : cups-dev
 BuildRequires : ghostscript-dev
 BuildRequires : glib-dev
@@ -35,6 +36,7 @@ BuildRequires : pkgconfig(poppler)
 BuildRequires : pkgconfig(zlib)
 BuildRequires : qpdf-dev
 Patch1: 0001-fix-systemd-service-file.patch
+Patch2: const-really.patch
 
 %description
 -------------------------------------------------------
@@ -119,18 +121,19 @@ man components for the cups-filters package.
 %prep
 %setup -q -n cups-filters-1.20.4
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1531410566
+export SOURCE_DATE_EPOCH=1532309353
 %autogen --disable-static --disable-avahi --without-tiff --disable-ijs  --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1531410566
+export SOURCE_DATE_EPOCH=1532309353
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/cups-filters
 cp COPYING %{buildroot}/usr/share/doc/cups-filters/COPYING
