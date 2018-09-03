@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.20.4
-Release  : 23
+Release  : 24
 URL      : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-4/cups-filters-1.20.4.tar.bz2
 Source0  : https://github.com/OpenPrinting/cups-filters/releases/download/release-1-20-4/cups-filters-1.20.4.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -128,20 +128,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532309353
+export SOURCE_DATE_EPOCH=1535937298
 %autogen --disable-static --disable-avahi --without-tiff --disable-ijs  --disable-mutool --without-rcdir --disable-braille --with-fontdir=/usr/share/defaults/fonts/conf.d --with-pdftops=pdftocairo --enable-driverless  --enable-auto-setup-driverless
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1532309353
+export SOURCE_DATE_EPOCH=1535937298
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/cups-filters
 cp COPYING %{buildroot}/usr/share/doc/cups-filters/COPYING
 %make_install
-## make_install_append content
+## install_append content
 mkdir -p %{buildroot}/usr/lib/systemd/system
 install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system/cups-browsed.service
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
