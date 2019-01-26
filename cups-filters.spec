@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.21.6
-Release  : 31
+Release  : 32
 URL      : https://www.openprinting.org/download/cups-filters/cups-filters-1.21.6.tar.bz2
 Source0  : https://www.openprinting.org/download/cups-filters/cups-filters-1.21.6.tar.bz2
 Summary  : Library for reading and writing cups filters
