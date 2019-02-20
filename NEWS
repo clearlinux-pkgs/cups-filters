@@ -1,5 +1,34 @@
-NEWS - OpenPrinting CUPS Filters v1.21.6 - 2018-12-17
+NEWS - OpenPrinting CUPS Filters v1.22.1 - 2019-02-15
 -----------------------------------------------------
+
+CHANGES IN V1.22.1
+
+	- braille: Use sort command with LC_ALL=C for reproducibility
+	  of the genrated files, needed for distribution packaging.
+	- cups-browsed, driverless: When polling the printer's
+          capabilities via get-printer-attributes IPP request for
+          driverless printing, use the attributes "all" and
+          "media-col-database". Without "all" some printers do not
+          report "urf-supported" and without "media-col-database" not
+          all paper size and marging info gets reported (Issue #22,
+          Pull request #86, CUPS issue #5484).
+	- braille: Document how to rework output before
+	  embossing. Thanks to Samuel Thibault for this patch (Pull
+	  request #90).
+
+CHANGES IN V1.22.0
+
+	- pdftopdf: Use QPDF for flattening interactive PDF forms
+	  (Issues #2, #23, #36, Pull request #88).
+	- pdftopdf: Fixed bug of closing temporary file prematurely
+	  when external PDF form flattening utilities fail (Thanks to
+	  Tobias Hoffmann for finding this, see pull request #88).
+	- pdftoopvp: More fixes for building with Poppler 0.72
+	  (Pull request #83, Issue #75).
+	- pdftoraster, pdftoijs, pdftoopvp: Removed support for
+	  Poppler 0.18 (Pull request #83).
+	- cups-browsed: Fixed crash in applying the BrowseFilter
+	  cups-browsed.conf directives (Debian bug #916765).
 
 CHANGES IN V1.21.6
 
