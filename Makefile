@@ -1,5 +1,5 @@
 PKG_NAME := cups-filters
-URL = https://www.openprinting.org/download/cups-filters/cups-filters-1.22.4.tar.bz2
+URL = https://www.openprinting.org/download/cups-filters/cups-filters-1.22.5.tar.bz2
 ARCHIVES = 
 
 include ../common/Makefile.common
