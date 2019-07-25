@@ -4,7 +4,7 @@
 #
 Name     : cups-filters
 Version  : 1.22.5
-Release  : 48
+Release  : 49
 URL      : https://www.openprinting.org/download/cups-filters/cups-filters-1.22.5.tar.bz2
 Source0  : https://www.openprinting.org/download/cups-filters/cups-filters-1.22.5.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -126,8 +126,8 @@ services components for the cups-filters package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559531364
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564018399
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -137,7 +137,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1559531364
+export SOURCE_DATE_EPOCH=1564018399
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cups-filters
 cp COPYING %{buildroot}/usr/share/package-licenses/cups-filters/COPYING
