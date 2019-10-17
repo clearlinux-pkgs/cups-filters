@@ -1,5 +1,253 @@
-NEWS - OpenPrinting CUPS Filters v1.22.5 - 2019-04-07
------------------------------------------------------
+NEWS - OpenPrinting CUPS Filters v1.25.11 - 2019-10-10
+------------------------------------------------------
+
+CHANGES IN V1.25.11
+
+	- cups-browsed: Really accept entries without printer name
+	  reported on a job status request (Issue #163).
+	- cups-browsed: Strip IPP atrribute values reported by the
+	  printer on a get-printer-attributes request from white
+	  space (Pull request #166).
+
+CHANGES IN V1.25.10
+
+	- libcupsfilters: Added NULL checks when handling page size
+	  names as some of the page sizes in CUPS' PWG media list have
+	  a NULL PPD name (Ubuntu bug #1847488).
+
+CHANGES IN V1.25.9
+
+	- cups-browsed: Fix leaks in get_printer_attributes() function.
+	- cups-browsed: Avoid infinite recursion on IPP 1.1 fallback.
+
+CHANGES IN V1.25.8
+
+	- cups-browsed: On a job status request accept also entries
+	  without the printer name being reported (Issue #163).
+	- cups-browsed: Fall back to IPP 1.1 if a
+	  get-printer-attributes IPP request with IPP 2.x fails (Issue
+	  #124, Issue #163).
+	- gstoraster: Use ".setfilladjust2" instead of the
+	  undocumented ".setfilladjust" PostScript command for
+	  Center-of-Pixel method to fill paths (Issue #164).
+
+CHANGES IN V1.25.7
+
+	- implicitclass, libcupsfilters: Fixes to solve an assertion
+	  error and printing to an Apple Raster printer (Issue #162,
+	  Ubuntu bug #1845286, Ubuntu bug #1845548).
+	- cups-browsed: Do not try to resolve the network interface
+	  name on Avahi messages which are not interface-related (like
+	  "All for now"or "Cache exhausted", Issue #163).
+	- Build system: The helper script ln-srf to build on systems
+	  with old ln was not included in the release tarballs (Issue
+	  #161).
+	- pdftoraster: Fixed some bugs in output bitmap generation (
+	  writePageImage() function): Segfault on output of
+	  up-side-down pages (back side when printing duplex on some
+	  printers), margin offsets not taken into account on
+	  monochrome jobs, CUPS_CSPACE_W color space not recognized as
+	  monochrome (Ubuntu bug #1845286).
+
+CHANGES IN V1.25.6
+
+	- implicitclass: Make sure the destination printer gets always
+	  set and do not pass on the cups-browsed-dest-printer when
+	  sending the job to the final destination (Issue #152, Pull
+	  request #159).
+	- Build system: Support old ln versions without the -r option
+	  (Pull request #154, #157).
+	- texttotext: Link with libiconv if needed (Pull request
+	  #155, #158).
+	- foomatic-rip: Fix argument representation for raw queue
+	  debug mesaage (Pull request #153).
+
+CHANGES IN V1.25.5
+
+	- bannertopdf: Added missing "#include <cstring>" to pdf.cxx
+	  so that bannertopdf correctly builds with QPDF 9.0.0 (Issue
+	  #134, Issue #151, Gentoo bug #693498).
+	- rastertopdf: Let the getIPPColorProfileName() function not
+	  return a pointer to a local variable (clang warning, Issue
+	  #150).
+	- cups-browsed: If a locally generated queue (usually with
+          "implicitclass://..." URI) left over from a previous
+          (crashed) session is picked up on startup, do not set the
+          URI as the remote printer's URI and do not cause a fatal
+          error on a failed get-printer-attributes IPP request (Issue
+          #148, Debian bug #939316).
+	- pdftopdf: Do not preserve encryption, since the output
+          already goes into the printer (Issue #146, Pull request
+          #147).
+
+CHANGES IN V1.25.4
+
+	- imagetoraster: Do not call imagetops and pstoraster for
+	  classifications and page labels as these filters are not
+	  included any more with cups-filters.  Classifications and
+	  page labels are currently not supported for direct image
+	  printing, only for PDF or PostScript input (which goes
+	  through pdftopdf).
+	- imagetoraster, imagetopdf: Fixed auto-rotation of images to
+	  fit output page best (Issue #145).
+	- pdftoraster: If the PPD contains several equally-sized page
+	  size entries which match the size of the input page and one
+	  is the size selected by the user via the "PageSize" or
+	  "media" option (or the default selection in the PPD) then
+	  prefer this one instead of simply the first matching one.
+	- pdftoraster: If the input page size cannot be matched with
+	  one of the PPD's page sizes it is considered a custom size,
+	  fill the page size name field of the CUPS Raster header with
+	  "Custom.XXXxYYY" then.
+	- pdftoraster: Match the input page size with a page size in
+	  the PPD only if the differences of the dimensions are less
+	  than 1%, also match the input page size against the
+	  imageable area of the PPD's page sizes if no match with the
+	  full page size is found (Issue #138).
+
+CHANGES IN V1.25.3
+
+	- Sample PPDs: In HP-Color_LaserJet_CM3530_MFP-PDF.ppd renamed
+	  "custom" choice of the option "stapleoption" to "customsize"
+	  as from CUPS 2.2.12 on "custom" is not accepted any more as a
+	  choice name in a PPD file.
+	- cups-browsed: Fixed check whether the remote printer understands
+	  PWG Raster (Issue #141).
+
+CHANGES IN V1.25.2
+
+	- foomatic-rip: Fixed segmentation fault when running
+	  foomatic-rip by hand and the PRINTER environment variable is
+	  not set (Pull request #139).
+	- cups-browsed: Added note to cups-browsed.conf and man page
+	  about IP-based URIs depending on the network interface used.
+	- cups-browsed: For each DNS-SD-discovered printer register
+	  each DNS-SD discovery instance with network interface,
+	  family, and IPP type. When DNS-SD messages of instances
+	  disappearing show up, only unregister this instance and
+	  remove the printer only if no instance is left. This
+	  prevents a local queue of a still available printer being
+	  removed when Wi-Fi (= one interface) is turned off (Issue
+	  #136).
+	- cups-browsed: If a remote printer is served from the local
+	  machine, prefer the "localhost"/loopback interface URI.
+	- cups-browsed: If a remote printer is discovered more than
+	  once, use the new instance only if it has no downgrades and
+	  at least one upgrade compared to the old one. Features
+	  currently compared are IPP/IPPS, loopback interface or not,
+	  and discovery via CUPS legacy/LDAP/DNS-SD.
+	- cups-browsed: If an Avahi-discovered entry comes through the
+	  "lo" interface, always use the host name "localhost". Use
+	  IP addresses instead of host names only if explicitly
+	  requested.
+	- cups-browsed: Consider remote printer entries also as from
+	  the same printer if one has the local machine's network name
+	  and the other "localhost" as host name (Issue #136).
+
+CHANGES IN V1.25.1
+
+	- imagetopdf: Fixed crash when no PPD file was supplied (Pull
+	  request #133).
+	- pdftoraster: Fixed offset issues leading to segmentation
+	  faults (Issue #131, Pull request #132).
+	- pdftoraster: Added anti-aliasing for better raster image
+	  quality (Pull request #129).
+	- pdftoraster: Added graceful handling of zero-page input
+	  (Issue #117, Pull request #127).
+
+CHANGES IN V1.25.0
+
+	- pdftoijs, pdftoopvp: Removed these deprecated filters
+	  completely as there is no demand for them any more. They
+	  also used unstable, undocumented APIs of Poppler.
+	- pdftoraster: Changed from using unstable, undocumented APIs
+	  of Poppler to stable, documented ones, to improve
+	  maintainability of this filter, and with it of the
+	  cups-filters package. Thanks to Tanmay Anand for
+	  contributing this as his Google Summer of Code 2019 project.
+	- libcupsfilters: Added support for color spaces CMY and RGBW
+	  when using filters without PPD file (mainly for development
+	  and debugging, option "print-color-mode" with values
+	  "cmy-XX" and "rgbw-XX" with XX being the number of bits per
+	  color).
+
+CHANGES IN V1.24.0
+
+	- cups-browsed: Integration of Deepak Patankar's Google Summer
+	  of Code 2018 project with the main goal of clustering
+	  different printers and automatically selecting the
+	  destination printers by job content and option/attribute
+	  settings. All changes of this release are done by Deepak as
+	  parts of his project.
+	- cups-browsed, implicitclass: Support for mixed clusters of
+	  remote CUPS queues and IPP network printers. For this PPD
+	  files of remote CUPS queues are generated by cups-browsed
+	  based on IPP queries, as for native IPP printers, the number
+	  of jobs for load balancing is polled in a way that it works
+	  also with native IPP printers, the implicitclass backend
+	  sends jobs directky to the printer instead of re-queueing
+	  them via CUPS.
+	- cups-browsed: Merge IPP attributes of several printers to
+	  combined attributes for the cluster to generate the
+	  cluster's PPD file, including PPD constraints for option
+	  combinations not fulfillable by any of the member printers,
+	  and finding reasonable, non-conflicting default settings,
+	- cups-browsed: Selection algorithm for the destination
+	  printer for a job sent to the cluster. Based on the job
+	  settings requested such as page size, media type, print
+	  quality, ... the best most suitable printer in the cluster
+	  for the job will be selected.
+	- cups-browsed, implicitclass: Filter jobs to clusters already
+	  locally. Due to the fact that a cluster's member printers
+	  are not exclusively non-raw CUPS queues with the complete
+	  filtering framework on the remote server, but also native
+	  IPP printers, we need to support generic driverless printers
+	  as destination. So we cannot pass on the input data
+	  unfiltered but need to filter locally. We let the cluster's
+	  PPD file emulate a PDF printer, letting the local CUPS queue
+	  of the cluster run pdftopdf and any pre-filters to turn the
+	  input into PDF and we let the implicitclass backend turn PDF
+	  into a format understood by the destination printer,
+	  supporting the 4 formats of driverless IPP printing: PDF,
+	  PWG Raster, Apple Raster, PCLm.
+
+CHANGES IN V1.23.0
+
+	- pdftops, mupdftoraster: Let pdftops call mutool directly and
+	  so that it directly outputs PostScript, eliminating the need
+	  to call the mupdftoraster and rastertops filters.
+	- mupdftoraster: Reduced the use of temporary files from 3 to
+	  just one.
+	- imagetopdf, imagetoraster, pdftopdf: Add support for
+	  print-scaling option (Issue #108, Pull request #118).
+
+CHANGES IN V1.22.6
+
+	- rastertops: Fixed PageSize settings in the PostScript output
+	  (Must be in points not in pixels).
+	- pdftops, mupdftoraster: Produce actual grayscale/monochrome
+	  PostScript (and not only instructions to print grayscale/
+	  monochrome) for jobs to be printed in grayscale/monochrome
+	  (Issue #96, Pull request #115).
+	- mupdftoraster: Fixed filter not producing output at all.
+	- Build system: ENABLE_DRIVERLESS got only defined with CUPS
+	  1.6 and newer, not with older CUPS versions (Issue #111).
+	- pdftopdf, imagetopdf, imagetoraster: Silenced compiler
+          warnings.
+	- cups-browsed, driverless: Replaced httpConnect() calls by
+	  httpConnect2() calls as the former CUPS library function is
+	  deprecated.
+	- Build system: Compile everything using the CUPS libraries
+	  with '-D_PPD_DEPRECATED=""' for the time being until the
+	  deprecated PPD API calls get replaced, to stop the flooding
+	  with PPD API deprecation warnings making more important
+	  warnings being overlooked.
+	- cups-browsed: When removing a local queue on shutdown or
+	  when DNS-SD reports the printer as disappeared check whether
+	  the local queue got overwritten by an external process as
+	  sometimes the shutdown or disappearing event comes too close
+	  for cups-browsed receiving a printer-modified notification
+	  from CUPS before (Ubuntu bug #1731417).
 
 CHANGES IN V1.22.5
 
@@ -2704,8 +2952,8 @@ CHANGES IN V1.0b1
 	- Named the package "OpenPrinting CUPS Filters"
 	- Renamed libcupslegacy to libcupsfilters
 	- Joined pdftops and cpdftocps filters into one C program
-	- Added new bannertopdf filter from Lars Uebernickel:
-	  https://launchpad.net/bannertopdf
+	- Added new bannertopdf filter from Lars Karlitski (formerly
+	  Uebernickel): https://launchpad.net/bannertopdf
 	- Added the filters for the PDF-based printing workflow, from
 	  OpenPrinting: http://sourceforge.jp/projects/opfc/ and
 	  http://www.openprinting.org/download/printing/pdf-printing/
