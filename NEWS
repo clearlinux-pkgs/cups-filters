@@ -1,5 +1,25 @@
-NEWS - OpenPrinting CUPS Filters v1.28.1 - 2020-08-26
+NEWS - OpenPrinting CUPS Filters v1.28.2 - 2020-09-10
 -----------------------------------------------------
+
+CHANGES IN V1.28.2
+
+	- driverless: Free allocated memory, use MAX_OUTPUT_LEN (Pull
+	  request #304).
+	- driverless: driverless: Make the two ippfind tasks(for IPP
+	  and IPPS) run in parallel (Pull request #302, #305, #306).
+	- braille: Support new liblouis tables not containing a
+	  display name (Pull request #303)
+	- Build system: Let ./configure not error out when there is
+	  more than one DejaVuSans.ttf test font candidate (Issue
+	  #300).
+	- cups-browsed: Crash when a remote printer set as default
+	  gets removed, due to missing variable in printf() call
+	  (Issue #299).
+	- libcupsfilters: Removed all signal handling and global
+	  variables from get_printer_attributes() and
+	  ippfind_based_uri_converter().  This is overkill for these
+	  quick operations and causes problems when shutting down
+	  cups-browsed (Issue #298).
 
 CHANGES IN V1.28.1
 
