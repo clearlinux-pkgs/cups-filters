@@ -1,5 +1,15 @@
-NEWS - OpenPrinting CUPS Filters v1.28.2 - 2020-09-10
+NEWS - OpenPrinting CUPS Filters v1.28.3 - 2020-09-24
 -----------------------------------------------------
+
+CHANGES IN V1.28.3
+
+	- libcupsfilters, cups-browsed: Fixed inconsistency between
+	  resolvers for DNS-SD-based URIs, resolve_uri() and
+	  ippfind_based_uri_converter(). Now both return a freeable
+	  string.
+	- libcupsfilters: Fix uninitialized buffer and parsing ippfind
+	  output in ippfind_based_uri_converter() function (Issue
+	  #308, Pull request #309).
 
 CHANGES IN V1.28.2
 
