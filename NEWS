@@ -1,5 +1,22 @@
-NEWS - OpenPrinting CUPS Filters v1.28.3 - 2020-09-24
+NEWS - OpenPrinting CUPS Filters v1.28.4 - 2020-10-08
 -----------------------------------------------------
+
+CHANGES IN V1.28.4
+
+	- driverless: Avoid duplicate PPD list entries from the same
+          device via UUID
+	- driverless: Reduce ippfind calls by "driverless" and
+	  "driverless-fax"called by CUPS. Let "driverless list" list
+	  both print and fax PPDs and "driverless-fax list" do
+	  nothing.
+	- driverless: Avoid duplicate listings in printer discovery,
+	  by "driverless-fax" not listing any URI as "driverless"
+	  lists them all already.
+	- driverless: Vastly improve performance by doing only one
+	  ippfind call instead of two (IPP, IPPS) as ippfind accepts
+	  more than one reg type on the command line.
+	- Sample PPDs: Corrected manufacturer name in
+	  Fuji_Xerox-DocuPrint_CM305_df-PDF.ppd.
 
 CHANGES IN V1.28.3
 
@@ -15,7 +32,7 @@ CHANGES IN V1.28.2
 
 	- driverless: Free allocated memory, use MAX_OUTPUT_LEN (Pull
 	  request #304).
-	- driverless: driverless: Make the two ippfind tasks(for IPP
+	- driverless: Make the two ippfind tasks(for IPP
 	  and IPPS) run in parallel (Pull request #302, #305, #306).
 	- braille: Support new liblouis tables not containing a
 	  display name (Pull request #303)
