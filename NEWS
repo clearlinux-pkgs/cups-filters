@@ -1,5 +1,10 @@
-NEWS - OpenPrinting CUPS Filters v1.28.4 - 2020-10-08
+NEWS - OpenPrinting CUPS Filters v1.28.5 - 2020-10-13
 -----------------------------------------------------
+
+CHANGES IN V1.28.5
+
+	- cups-browsed: UUID from IPP response was used after its
+	  pointer was freed by ippDelete() (Pull request #311).
 
 CHANGES IN V1.28.4
 
