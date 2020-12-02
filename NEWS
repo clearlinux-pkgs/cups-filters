@@ -1,5 +1,32 @@
-NEWS - OpenPrinting CUPS Filters v1.28.5 - 2020-10-13
+NEWS - OpenPrinting CUPS Filters v1.28.6 - 2020-12-02
 -----------------------------------------------------
+
+CHANGES IN V1.28.6
+
+	- libcupsfilters: In generated PPDs add a grayscale mode if
+	  there are only color printing modes (from OpenPrinting
+	  CUPS).
+	- libcupsfilters: In generated PPDs add an "OutputBin" option
+	  also if it has only one choice (OpenPrinting CUPS pull
+	  request #18).
+	- libcupsfilters: Generated PPDs could have an "Unknown"
+	  default InputSlot (OpenPrinting CUPS issue #44).
+	- cups-browsed: Removed unneeded IPP attribute additions
+	  preventing the created local queues from preserving a
+	  location or description the user assigns to them (Issue
+	  #323).
+	- cups-browsed: Removed all calls of the resolve_uri() function
+	  of libcupsfilters, as these are not actually needed and in case
+	  the supplied DNS-SD-based URI is not resolvable, the function
+	  gets stuck for ~5 seconds.
+	- cups-browsed: Fixed several memory leaks, mainly from the
+	  code to merge printer IPP attributes for clusters (Pull
+	  request #322).
+	- cups-browsed: Silenced compiler warning.
+	- foomatic-rip: Fix infinite loop and input from file on raw
+	  printing (Pull request #318).
+	- foomatic-rip: Remove temporary file created during pdf-to-ps
+	  conversion (Pull request #313).
 
 CHANGES IN V1.28.5
 
