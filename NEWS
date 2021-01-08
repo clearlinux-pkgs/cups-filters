@@ -1,5 +1,23 @@
-NEWS - OpenPrinting CUPS Filters v1.28.6 - 2020-12-02
+NEWS - OpenPrinting CUPS Filters v1.28.7 - 2021-01-07
 -----------------------------------------------------
+
+CHANGES IN V1.28.7
+
+	- driverless: Removed the support quality check from Pull
+	  request #235 as it takes significant time for each printer
+	  being listed, making cups-driverd (`lpinfo -m`) timing out
+	  when there are many printers (OpenPrinting CUPS issue #65).
+	- libcupsfilters: In the PPD generator give priority to Apple
+	  Raster against PDF (Issue #331).
+	- libcupsfilters: Added NULL check when removing ".Borderless"
+	  suffixes from page size names (Issue #314, Pull request
+	  #328).
+	- libcupsfilters: In the cupsRasterParseIPPOptions() map the
+	  color spaces the same way as in the PPD generator (Issue
+	  #326, Pull request #327).	
+	- libcupsfilters: Fixed addition of grayscale mode in
+	  generated PPD files, to avoid duplicate entries
+	  (OpenPrinting CUPS issue #59).
 
 CHANGES IN V1.28.6
 
