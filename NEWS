@@ -1,5 +1,31 @@
-NEWS - OpenPrinting CUPS Filters v1.28.8 - 2021-03-25
+NEWS - OpenPrinting CUPS Filters v1.28.9 - 2021-06-15
 -----------------------------------------------------
+
+CHANGES IN V1.28.9
+
+	- libcupsfilters: Silenced compiler warnings
+	- libcupsfilters: Removed duplicate code in the
+	  apply_filters() function.
+	- driverless: If there are no driverless IPP printers
+	  available let "driverless" terminate with exit code 0 and
+	  not 1, to follow CUPS' standard of backends in discovery
+	  mode terminating with 0 if there are no appropriate printers
+	  found (Issue #375).
+	- gstoraster, foomatic-rip: Fixed Ghostscript command line for
+	  counting pages as it took too long on PDFs from evince when
+	  printing DjVu files (Issue #354, Pull request #371, Ubuntu
+	  bug #1920730).
+	- cups-browsed: Renamed ldap_connect() due to conflict in
+	  new openldap (Issue #367, Pull request #370).
+	- pdftoraster: Free color data after processing of each page
+	  (Pull request #363).
+	- cups-browsed: Always save "...-default" option entries
+	  from printers.conf, regardless of presence or absense
+	  of PPD file (Pull request #359).
+	- cups-browsed: Start after network-online.target (Pull
+	  request #360).
+	- texttopdf: Set default margins when no PPD file is used
+	  (Pull request #356).
 
 CHANGES IN V1.28.8
 
