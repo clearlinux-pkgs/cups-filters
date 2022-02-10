@@ -1,4 +1,4 @@
-From 16312352a8ae8b056a4742e6f3ffc6c3b8b42d57 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: "Simental Magana, Marcos" <marcos.simental.magana@intel.com>
 Date: Tue, 31 Oct 2017 09:57:37 -0600
 Subject: [PATCH] fix systemd service file
@@ -8,7 +8,7 @@ Subject: [PATCH] fix systemd service file
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/utils/cups-browsed.service b/utils/cups-browsed.service
-index c0b8d06..9aad6e1 100644
+index 3bf0656..93043b9 100644
 --- a/utils/cups-browsed.service
 +++ b/utils/cups-browsed.service
 @@ -1,8 +1,8 @@
@@ -23,6 +23,3 @@ index c0b8d06..9aad6e1 100644
  
  [Service]
  ExecStart=/usr/sbin/cups-browsed
--- 
-2.14.3
-
