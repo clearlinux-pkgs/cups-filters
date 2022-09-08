@@ -2,6 +2,7 @@ libcupsfilters.so.1:_CFcupsSetError
 libcupsfilters.so.1:_cupsImagePutCol
 libcupsfilters.so.1:_cupsImagePutRow
 libcupsfilters.so.1:_cupsImageReadBMP
+libcupsfilters.so.1:_cupsImageReadEXIF
 libcupsfilters.so.1:_cupsImageReadGIF
 libcupsfilters.so.1:_cupsImageReadJPEG
 libcupsfilters.so.1:_cupsImageReadPIX
