@@ -5,7 +5,7 @@
 #
 Name     : cups-filters
 Version  : 1.28.16
-Release  : 76
+Release  : 77
 URL      : https://www.openprinting.org/download/cups-filters/cups-filters-1.28.16.tar.bz2
 Source0  : https://www.openprinting.org/download/cups-filters/cups-filters-1.28.16.tar.bz2
 Summary  : Library for reading and writing cups filters
@@ -127,7 +127,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686077784
+export SOURCE_DATE_EPOCH=1688579776
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -146,7 +146,7 @@ export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -f
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1686077784
+export SOURCE_DATE_EPOCH=1688579776
 rm -rf %{buildroot}
 %make_install
 ## install_append content

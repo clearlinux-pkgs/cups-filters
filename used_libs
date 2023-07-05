@@ -9,7 +9,7 @@ libglib-2.0.so.0
 libgobject-2.0.so.0
 libjpeg.so.62
 liblcms2.so.2
-libldap-2.4.so.2
+libldap.so.2
 libm.so.6
 libpng16.so.16
 libpoppler-cpp.so.0
