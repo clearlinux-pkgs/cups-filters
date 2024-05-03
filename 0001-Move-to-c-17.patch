@@ -1,0 +1,42 @@
+From 6edc448e1ef1465f1c85b9fc1bbe803f06037b24 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 2 May 2024 17:54:46 -0700
+Subject: [PATCH] Move to c++17
+
+See https://github.com/OpenPrinting/cups-filters/issues/512
+The previous build_prepend change was not working with gcc-14
+
+---
+ Makefile.am  | 2 +-
+ configure.ac | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 47a13bc..a782506 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -528,7 +528,7 @@ pdftopdf_SOURCES = \
+ pdftopdf_CFLAGS = \
+ 	$(LIBQPDF_CFLAGS) \
+ 	$(CUPS_CFLAGS)
+-pdftopdf_CXXFLAGS = -std=c++0x $(pdftopdf_CFLAGS)   # -std=c++11
++pdftopdf_CXXFLAGS = $(pdftopdf_CFLAGS)   # -std=c++11
+ pdftopdf_LDADD = \
+ 	$(LIBQPDF_LIBS) \
+ 	$(CUPS_LIBS)
+diff --git a/configure.ac b/configure.ac
+index c1b108f..125366f 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -52,7 +52,7 @@ AH_BOTTOM([
+ # ===========================
+ AC_PROG_CC
+ AC_PROG_CXX
+-AX_CXX_COMPILE_STDCXX([11],[noext],[mandatory])
++AX_CXX_COMPILE_STDCXX([17],[noext],[mandatory])
+ AM_PROG_CC_C_O
+ AM_ICONV
+ AC_PROG_CPP
+-- 
+2.44.0
+

@@ -146,7 +146,6 @@ libcupsfilters.so.1:sgiGetRow
 libcupsfilters.so.1:sgiOpen
 libcupsfilters.so.1:sgiOpenFile
 libcupsfilters.so.1:sgiPutRow
-libcupsfilters.so.1:strlcpy
 libfontembed.so.1:aglfn13
 libfontembed.so.1:dyn_ensure
 libfontembed.so.1:dyn_free
