@@ -1,2 +1,3 @@
-mkdir -p %{buildroot}/usr/lib/systemd/system
-install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system/cups-browsed.service
+# not installing the service while cups-browsed is problematic
+# mkdir -p %{buildroot}/usr/lib/systemd/system
+# install -p -m 644 utils/cups-browsed.service %{buildroot}/usr/lib/systemd/system/cups-browsed.service
